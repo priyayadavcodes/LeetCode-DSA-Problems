@@ -1,16 +1,19 @@
 from queue import Queue
 class Solution:
     def findCircleNum(self, isConnected: List[List[int]]) -> int:
-        
-        ls = [[] for j in range(len(isConnected))]
-        for i in range(len(isConnected)):
-            for j in range(len(isConnected)):
-                if i != j:
-                    if isConnected[i][j] == 1:
-                        ls[i].append(j)
-        n = len(ls)
+        mat = isConnected
+        def adj_ls(elf,mat:List[List[int]]):
 
-        def bfs_traverse(self, V:int,adj: ls,start_node:int, visited:int):
+            ls = [[] for j in range(len(isConnected))]
+            for i in range(len(isConnected)):
+                for j in range(len(isConnected)):
+                    if i != j:
+                        if isConnected[i][j] == 1:
+                            ls[i].append(j)
+            return ls
+        
+
+        def bfs_traverse(self, V:int,adj: List,start_node:int, visited:int):
             q = Queue(maxsize = V)
             q.put(start_node)
             visited[start_node] = 1
@@ -27,7 +30,8 @@ class Solution:
             return bfs,visited
 
         component_count = 0
-        adj = ls
+        adj = adj_ls(self,mat)
+        n = len(adj)
         V = n
         visited = [0 for i in range(V)]
 
