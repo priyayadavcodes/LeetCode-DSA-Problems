@@ -5,12 +5,12 @@ class Solution:
         if not nums:
             return []
         
-        # Initialize a list to keep track of indices in the current window
-        window = []
+        n = len(nums)
         result = []
+        window = []
         
-        for i in range(len(nums)):
-            # Remove indices that are out of the bounds of the sliding window
+        for i in range(n):
+            # Remove elements that are out of the current window
             if window and window[0] < i - k + 1:
                 window.pop(0)
             
