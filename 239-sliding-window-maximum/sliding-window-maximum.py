@@ -1,5 +1,3 @@
-
-from collections import deque
 from typing import List
 
 class Solution:
@@ -7,23 +5,24 @@ class Solution:
         if not nums:
             return []
         
-        dq = deque()
+        # Initialize a list to keep track of indices in the current window
+        window = []
         result = []
         
         for i in range(len(nums)):
             # Remove indices that are out of the bounds of the sliding window
-            if dq and dq[0] < i - k + 1:
-                dq.popleft()
+            if window and window[0] < i - k + 1:
+                window.pop(0)
             
-            # Remove elements from the deque which are smaller than the current element
-            while dq and nums[dq[-1]] < nums[i]:
-                dq.pop()
+            # Remove elements from the list which are smaller than the current element
+            while window and nums[window[-1]] < nums[i]:
+                window.pop()
             
-            # Add the current element index to the deque
-            dq.append(i)
+            # Add the current element index to the list
+            window.append(i)
             
             # Append the maximum element of the window to the result list
             if i >= k - 1:
-                result.append(nums[dq[0]])
+                result.append(nums[window[0]])
         
         return result
