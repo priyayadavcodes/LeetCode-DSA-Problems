@@ -4,6 +4,3 @@ class Solution:
         k = k % n
         nums[:] = nums[-k:]+nums[0:-k]
         return nums
-
-
-
