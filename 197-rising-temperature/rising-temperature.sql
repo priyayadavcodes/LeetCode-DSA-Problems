@@ -1,10 +1,5 @@
-select id from 
-(select *,
-lag(temperature
-) over() as prev_temp,
-lag(recorddate) over() as prev_date
-from weather
-order by recorddate) t 
-where t.temperature > t.prev_temp  and datediff(recorddate,prev_date) = 1
-
-
+SELECT curr.id
+FROM weather curr
+JOIN weather prev
+  ON curr.recorddate = DATE_ADD(prev.recorddate, INTERVAL 1 DAY)
+WHERE curr.temperature > prev.temperature;
