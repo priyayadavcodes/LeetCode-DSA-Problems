@@ -1,6 +1,5 @@
 SELECT curr.id
 FROM weather curr
-LEFT JOIN weather prev
-  ON curr.recorddate = DATE_ADD(prev.recorddate, INTERVAL 1 DAY)
-WHERE prev.temperature IS NOT NULL
+CROSS JOIN weather prev
+WHERE DATEDIFF(curr.recorddate, prev.recorddate) = 1
   AND curr.temperature > prev.temperature;
