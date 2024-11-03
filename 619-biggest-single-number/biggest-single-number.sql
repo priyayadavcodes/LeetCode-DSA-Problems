@@ -1,12 +1,8 @@
-with tab as(select
-num,
-case 
-    when count(num) = 1 then 1
-    else 0
-end as cnt 
-from mynumbers
-group by num )
-
-select max(num) as num
-from tab 
-where cnt = 1
+SELECT MAX(num) AS num
+FROM mynumbers
+WHERE num IN (
+    SELECT num
+    FROM mynumbers
+    GROUP BY num
+    HAVING COUNT(num) = 1
+);
